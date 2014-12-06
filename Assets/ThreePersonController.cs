@@ -12,40 +12,42 @@ public class ThreePersonController : MonoBehaviour {
 	public float Maxdistance;
 	public float moveSpeed;
 	public float verticalRatio;
-
-	// Use this for initialization
-	void Start () {
-
-	}
+	
 
 	void CalculateHeight(){
 		Vector3 originVector = camera.transform.position;
+		Vector3 localVector = camera.transform.localPosition;
+
 		// REMOVE Y FACTOR IN magnitude
 		originVector.y = player.transform.position.y;
 		
 		float y = Maxdistance - (originVector - player.transform.position).magnitude;
-		originVector.y=y;
-		originVector.x = 0;
-		originVector.z = 0;
-		camera.transform.localPosition = originVector*verticalRatio;
+		localVector.y=y;
+		camera.transform.localPosition = localVector*verticalRatio;
 	}
+	
 
 	// Update is called once per frame
 	void Update () {
+		// GET INPUT AXIS
 		float vertical = Input.GetAxis("Vertical");
 		float horizontal = Input.GetAxis("Horizontal");
+		// GET DIRECTION
 		Vector3 forward = camera.transform.forward;
 		Vector3 right = camera.transform.right;
 
-		// confirm camera y 
+		//KEEP Y AXIX 
 		forward.y = 0;
-		forward.Normalize();
 		right.y = 0;
+		// GET DIRECTION UNIT VECTOR
+		forward.Normalize();
 		right.Normalize ();
-		float Yvelocity = player.rigidbody.velocity.y;
 
+		//FOR RESET CHARACTOR FLOAT IN AIR
+		float Yvelocity = player.rigidbody.velocity.y;
 		Vector3 distance = (  camera.transform.position - player.transform.position );
 		distance.y = 0;
+
 		if (vertical > 0) {
 			player.transform.rotation = Quaternion.Euler(0,camera.transform.rotation.eulerAngles.y,0);
 			player.rigidbody.velocity = forward*moveSpeed;
@@ -95,6 +97,7 @@ public class ThreePersonController : MonoBehaviour {
 			}
 		}
 
+		//RESET CHARACTOR FLOAT IN AIR
 		player.rigidbody.velocity = new Vector3 (player.rigidbody.velocity.x, Yvelocity, player.rigidbody.velocity.z);
 	}
 }
