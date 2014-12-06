@@ -21,6 +21,8 @@ public class ThreePersonController : MonoBehaviour {
 
 	//FOR RESET CHARACTOR FLOAT IN AIR
 	private float originYVelocity; 
+	//FOR Continue Movement
+	private float timer;
 
 	void CalculateHeight(){
 		Vector3 originVector = mainCamera.transform.position;
@@ -42,10 +44,19 @@ public class ThreePersonController : MonoBehaviour {
 		}else if( this.isVertiMove ){
 			player.rigidbody.velocity = this.vertiVelocity;
 		}
-		// Caculate the player's degree from velocity 
+		 
 		if (this.isHoriMove || this.isVertiMove) {
+			// Caculate the player's degree from velocity
 			float rotate = Mathf.Atan2 (player.rigidbody.velocity.x, player.rigidbody.velocity.z);
 			player.transform.rotation = Quaternion.Euler (0, rotate / Mathf.PI * 180, 0);
+
+			// Let player move continue a little bit
+			this.timer = 0.1f;
+		}
+		if (this.timer >= 0) {
+			this.timer -= Time.deltaTime;
+		} else {
+			player.rigidbody.velocity = Vector3.zero;
 		}
 		// Reset Y axis velocity to origin
 		player.rigidbody.velocity = new Vector3 (player.rigidbody.velocity.x, this.originYVelocity, player.rigidbody.velocity.z);
