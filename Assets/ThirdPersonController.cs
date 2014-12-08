@@ -119,16 +119,14 @@ public class ThirdPersonController : MonoBehaviour {
 		if (horizontal > 0){
 			if( probe.counter > 0 ){
 				cameraCollisionBox.transform.position += -right*moveSpeed*Time.deltaTime;
-			}else{
-				this.horiVelocity = right*moveSpeed;
 			}
+			this.horiVelocity = right*moveSpeed;
 			isHoriMove = true;
 		}else if (horizontal < 0){
 			if( probe.counter > 0 ){
 				cameraCollisionBox.transform.position += right*moveSpeed*Time.deltaTime;
-			}else{
-				this.horiVelocity = -right*moveSpeed;
 			}
+			this.horiVelocity = -right*moveSpeed;
 			isHoriMove = true;
 		}
 
