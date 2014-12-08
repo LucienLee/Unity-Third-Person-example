@@ -111,7 +111,7 @@ public class ThirdPersonController : MonoBehaviour {
 				cameraCollisionBox.transform.position = newPosition;
 			}else{
 				//Camera move higher to see the player
-				tCalculateHeight();
+				CalculateHeight();
 			}
 			isVertiMove = true;
 		}
