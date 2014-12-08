@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ThreePersonController : MonoBehaviour {
+public class ThirdPersonController : MonoBehaviour {
 
 	public GameObject player;
 	public GameObject mainCamera;
@@ -98,7 +98,7 @@ public class ThreePersonController : MonoBehaviour {
 				cameraCollisionBox.transform.position = newPosition;
 			}
 
-			this.CalculateHeight();
+			CalculateHeight();
 			isVertiMove = true;
 
 		}else if( vertical < 0){
@@ -111,7 +111,7 @@ public class ThreePersonController : MonoBehaviour {
 				cameraCollisionBox.transform.position = newPosition;
 			}else{
 				//Camera move higher to see the player
-				this.CalculateHeight();
+				tCalculateHeight();
 			}
 			isVertiMove = true;
 		}
